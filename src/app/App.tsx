@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { Navigate, Route, Routes, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { ContentBlocks } from '../components/ContentBlocks'
 import { ToolShell } from '../components/ToolShell'
 import { DEFAULT_LOCALE, LOCALES, getToolBySlug, getToolPath } from '../config/tools'
 import { DnsPropagationTool } from '../features/dns-checker/DnsPropagationTool'
@@ -35,7 +34,6 @@ function ToolRoute({ locale, toolId }: { locale: LocaleCode; toolId: ToolId }) {
         {toolId === 'youtube-thumbnail-grabber' && <YouTubeThumbnailTool />}
         {toolId === 'image-converter' && <ImageConverterTool />}
         {toolId === 'dns-propagation-check' && <DnsPropagationTool />}
-        <ContentBlocks section={section} />
       </ToolShell>
     </>
   )
