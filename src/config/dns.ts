@@ -9,6 +9,7 @@ export const RESOLVERS: ResolverDefinition[] = [
     region: 'North America',
     endpoint: 'https://dns.google/resolve',
     kind: 'google-json',
+    browserSupported: true,
   },
   {
     id: 'cloudflare-global',
@@ -16,19 +17,6 @@ export const RESOLVERS: ResolverDefinition[] = [
     region: 'Global Edge',
     endpoint: 'https://cloudflare-dns.com/dns-query',
     kind: 'rfc-json',
-  },
-  {
-    id: 'adguard-eu',
-    name: 'AdGuard DNS',
-    region: 'Europe',
-    endpoint: 'https://dns.adguard-dns.com/resolve',
-    kind: 'google-json',
-  },
-  {
-    id: 'quad9-global',
-    name: 'Quad9',
-    region: 'Global',
-    endpoint: 'https://dns11.quad9.net/dns-query',
-    kind: 'rfc-json',
+    browserSupported: true,
   },
 ]

@@ -56,6 +56,7 @@ export interface ResolverDefinition {
   region: string
   endpoint: string
   kind: 'google-json' | 'rfc-json'
+  browserSupported?: boolean
 }
 
 export interface DnsAnswer {

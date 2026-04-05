@@ -62,6 +62,8 @@ export function DnsPropagationTool() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
+  const activeResolvers = RESOLVERS.filter((resolver) => resolver.browserSupported !== false)
+
   async function handleRun() {
     if (!hostname.trim()) {
       setError(t('dns.noHostname'))
@@ -71,7 +73,7 @@ export function DnsPropagationTool() {
     setError(null)
     setLoading(true)
     setResults(
-      RESOLVERS.map((resolver) => ({
+      activeResolvers.map((resolver) => ({
         resolverId: resolver.id,
         resolverName: resolver.name,
         region: resolver.region,
@@ -81,7 +83,7 @@ export function DnsPropagationTool() {
       })),
     )
 
-    const settled = await Promise.all(RESOLVERS.map((resolver) => queryResolver(hostname.trim(), recordType, resolver)))
+    const settled = await Promise.all(activeResolvers.map((resolver) => queryResolver(hostname.trim(), recordType, resolver)))
     setResults(settled)
     setLoading(false)
   }
@@ -91,7 +93,8 @@ export function DnsPropagationTool() {
   return (
     <div className="space-y-6">
       <div className="rounded-3xl border border-coral-200 bg-coral-50 p-4 text-sm leading-6 text-ink-700">
-        {t('dns.limitation')}
+        <p>{t('dns.limitation')}</p>
+        <p className="mt-2">{t('dns.browserResolverNote')}</p>
       </div>
 
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_180px_220px_auto]">
