@@ -6,9 +6,10 @@ import type { LocaleCode, ToolId } from '../types'
 interface LanguageSwitcherProps {
   locale: LocaleCode
   toolId: ToolId
+  showLabel?: boolean
 }
 
-export function LanguageSwitcher({ locale, toolId }: LanguageSwitcherProps) {
+export function LanguageSwitcher({ locale, toolId, showLabel = true }: LanguageSwitcherProps) {
   const { i18n, t } = useTranslation()
   const navigate = useNavigate()
 
@@ -20,7 +21,7 @@ export function LanguageSwitcher({ locale, toolId }: LanguageSwitcherProps) {
 
   return (
     <label className="block text-sm text-ink-700">
-      <span className="mb-2 block font-medium">{t('languageLabel')}</span>
+      {showLabel ? <span className="mb-2 block font-medium">{t('languageLabel')}</span> : null}
       <select
         className="field"
         value={locale || DEFAULT_LOCALE}
