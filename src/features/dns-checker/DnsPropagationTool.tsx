@@ -93,7 +93,7 @@ export function DnsPropagationTool() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-3xl border border-coral-200 bg-coral-50 p-4 text-sm leading-6 text-ink-700">
+      <div className="glass-cut rounded-3xl border border-coral-400/25 bg-coral-500/10 p-4 text-sm leading-6 text-ink-100/78">
         <p>{t('dns.limitation')}</p>
         <p className="mt-2">{t('dns.browserResolverNote')}</p>
       </div>
@@ -168,7 +168,7 @@ export function DnsPropagationTool() {
                           ? t('dns.noAnswer')
                           : result.status === 'error'
                             ? t('dns.error')
-                            : 'OK'}
+                            : t('dns.ok')}
                     </span>
                   </td>
                   <td className="px-4 py-4 text-ink-100/70">
@@ -179,7 +179,7 @@ export function DnsPropagationTool() {
                         ))}
                       </ul>
                     ) : result.error ? (
-                      result.error
+                      `${t('dns.error')}: ${result.error}`
                     ) : (
                       '—'
                     )}

@@ -104,10 +104,10 @@ export function ImageConverterTool() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-3xl border border-dashed border-ink-300 bg-ink-50/70 p-6">
+      <div className="glass-cut rounded-3xl border border-dashed border-teal-300/30 bg-ink-800/60 p-6 shadow-[inset_0_0_30px_rgba(53,239,229,0.06)]">
         <label className="flex cursor-pointer flex-col items-center justify-center gap-3 text-center">
           <span className="eyebrow">{t('image.selectFile')}</span>
-          <span className="text-sm text-ink-600">{t('image.dropHint')}</span>
+          <span className="text-sm text-ink-100/70">{t('image.dropHint')}</span>
           <input
             className="hidden"
             type="file"
@@ -120,7 +120,7 @@ export function ImageConverterTool() {
 
       <div className="grid gap-4 md:grid-cols-2">
         <label>
-          <span className="mb-2 block text-sm font-medium text-ink-800">{t('image.targetFormat')}</span>
+          <span className="mb-2 block text-sm font-medium text-ink-100/80">{t('image.targetFormat')}</span>
           <select className="field" value={format} onChange={(event) => setFormat(event.target.value as ImageOutputFormat)}>
             {formats.map((option) => (
               <option key={option} value={option}>
@@ -131,7 +131,7 @@ export function ImageConverterTool() {
         </label>
 
         <label>
-          <span className="mb-2 block text-sm font-medium text-ink-800">
+          <span className="mb-2 block text-sm font-medium text-ink-100/80">
             {t('image.quality')}: {Math.round(quality * 100)}%
           </span>
           <input
@@ -157,20 +157,20 @@ export function ImageConverterTool() {
         )}
       </div>
 
-      <p className="text-sm text-ink-600">{t('image.privacy')}</p>
+      <p className="text-sm text-ink-100/68">{t('image.privacy')}</p>
       {error && <p className="text-sm text-red-600">{error}</p>}
 
       {(file || downloadUrl) && (
         <div className="grid gap-4 lg:grid-cols-2">
           {sourceUrl && (
-            <article className="rounded-3xl border border-ink-200 bg-white p-4">
-              <p className="mb-3 font-semibold text-ink-900">{t('image.original')}</p>
+            <article className="glass-cut rounded-3xl border border-teal-300/20 bg-ink-800/60 p-4">
+              <p className="mb-3 font-semibold text-ink-50">{t('image.original')}</p>
               <img className="max-h-96 w-full rounded-2xl object-contain" src={sourceUrl} alt="Original preview" />
             </article>
           )}
           {downloadUrl && (
-            <article className="rounded-3xl border border-ink-200 bg-white p-4">
-              <p className="mb-3 font-semibold text-ink-900">{t('image.converted')}</p>
+            <article className="glass-cut rounded-3xl border border-coral-400/20 bg-ink-800/60 p-4">
+              <p className="mb-3 font-semibold text-ink-50">{t('image.converted')}</p>
               <img className="max-h-96 w-full rounded-2xl object-contain" src={downloadUrl} alt="Converted preview" />
             </article>
           )}

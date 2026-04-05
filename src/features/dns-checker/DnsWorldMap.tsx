@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import type { DnsQueryResult, ResolverDefinition } from '../../types'
 
 interface DnsWorldMapProps {
@@ -6,6 +7,8 @@ interface DnsWorldMapProps {
 }
 
 export function DnsWorldMap({ resolvers, results }: DnsWorldMapProps) {
+  const { t } = useTranslation()
+
   function getResultStatus(resolverId: string) {
     return results.find((result) => result.resolverId === resolverId)?.status ?? 'idle'
   }
@@ -18,16 +21,24 @@ export function DnsWorldMap({ resolvers, results }: DnsWorldMapProps) {
     return 'fill-ink-200/70 stroke-ink-200/70'
   }
 
+  function getStatusLabel(status: DnsQueryResult['status']) {
+    if (status === 'success') return t('dns.ok')
+    if (status === 'loading') return t('dns.loading')
+    if (status === 'empty') return t('dns.noAnswer')
+    if (status === 'error') return t('dns.error')
+    return t('dns.idle')
+  }
+
   return (
     <section className="glass-cut overflow-hidden rounded-3xl border border-teal-300/20 bg-ink-900/70">
       <div className="cyber-line surface-grid border-b border-teal-300/20 px-5 py-4">
-        <p className="eyebrow">Resolver map</p>
-        <h3 className="mt-2 font-serif text-2xl text-ink-50">Browser-safe DNS network view</h3>
+        <p className="eyebrow">{t('dns.mapLabel')}</p>
+        <h3 className="mt-2 font-serif text-2xl text-ink-50">{t('dns.mapTitle')}</h3>
       </div>
 
       <div className="grid gap-6 p-5 lg:grid-cols-[minmax(0,1fr)_260px]">
         <div className="overflow-hidden rounded-[24px] border border-teal-300/15 bg-[#06101a] p-3">
-          <svg viewBox="0 0 1000 420" className="h-full w-full" role="img" aria-label="Resolver world map">
+          <svg viewBox="0 0 1000 420" className="h-full w-full" role="img" aria-label={t('dns.mapTitle')}>
             <rect x="0" y="0" width="1000" height="420" fill="#06101a" />
             <g fill="none" stroke="rgba(130,255,248,0.14)" strokeWidth="1">
               <path d="M42 110h916" />
@@ -85,7 +96,7 @@ export function DnsWorldMap({ resolvers, results }: DnsWorldMapProps) {
                               : 'bg-ink-100/10 text-ink-100/70'
                     }`}
                   >
-                    {status}
+                    {getStatusLabel(status)}
                   </span>
                 </div>
               </div>

@@ -81,7 +81,7 @@ export function ToolShell({ locale, toolId, title, description, children }: Tool
           </section>
 
           <footer className="px-2 pb-6 pt-2 text-sm text-ink-100/62">
-            Built as an open-source frontend utility collection.
+            {t('footerBuilt')}
             {' '}
             <a
               className="text-coral-300 underline-offset-4 hover:underline"
@@ -89,7 +89,7 @@ export function ToolShell({ locale, toolId, title, description, children }: Tool
               target="_blank"
               rel="noreferrer"
             >
-              Repository
+              {t('repositoryLabel')}
             </a>
           </footer>
         </main>
