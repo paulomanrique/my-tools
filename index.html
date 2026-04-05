@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Frontend-only browser tools for YouTube thumbnails, image conversion, and DNS propagation checks." />
+    <title>tools.paulo.dev</title>
+    <script>
+      const params = new URLSearchParams(window.location.search)
+      const redirect = params.get('redirect')
+      if (redirect) {
+        window.history.replaceState(null, '', redirect)
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-DTDAwT9M.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DEN1Q2TR.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
