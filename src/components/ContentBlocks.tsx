@@ -16,20 +16,20 @@ export function ContentBlocks({ section }: ContentBlocksProps) {
       <AdSlot slotId={`${section}-top`} label={t('adLabel')} />
 
       <section className="grid gap-4 md:grid-cols-2">
-        <article className="rounded-3xl border border-ink-200 bg-white p-6">
-          <h3 className="font-serif text-2xl text-ink-900">{t('howToTitle')}</h3>
-          <ol className="mt-4 space-y-3 text-sm leading-6 text-ink-600">
+        <article className="glass-cut rounded-3xl border border-teal-300/20 bg-ink-800/60 p-6">
+          <h3 className="font-serif text-2xl text-ink-50">{t('howToTitle')}</h3>
+          <ol className="mt-4 space-y-3 text-sm leading-6 text-ink-100/72">
             {howTo.map((item, index) => (
               <li key={item}>
-                <span className="mr-2 font-semibold text-coral-600">{index + 1}.</span>
+                <span className="mr-2 font-semibold text-coral-300">{index + 1}.</span>
                 {item}
               </li>
             ))}
           </ol>
         </article>
-        <article className="rounded-3xl border border-ink-200 bg-white p-6">
-          <h3 className="font-serif text-2xl text-ink-900">{t('whyItMattersTitle')}</h3>
-          <ul className="mt-4 space-y-3 text-sm leading-6 text-ink-600">
+        <article className="glass-cut rounded-3xl border border-coral-400/20 bg-ink-800/60 p-6">
+          <h3 className="font-serif text-2xl text-ink-50">{t('whyItMattersTitle')}</h3>
+          <ul className="mt-4 space-y-3 text-sm leading-6 text-ink-100/72">
             {whyItMatters.map((item) => (
               <li key={item}>{item}</li>
             ))}
@@ -39,13 +39,13 @@ export function ContentBlocks({ section }: ContentBlocksProps) {
 
       <AdSlot slotId={`${section}-bottom`} label={t('adLabel')} />
 
-      <section className="rounded-3xl border border-ink-200 bg-white p-6">
-        <h3 className="font-serif text-2xl text-ink-900">{t('faqTitle')}</h3>
+      <section className="glass-cut rounded-3xl border border-teal-300/20 bg-ink-800/60 p-6">
+        <h3 className="font-serif text-2xl text-ink-50">{t('faqTitle')}</h3>
         <div className="mt-6 space-y-4">
           {faq.map((item) => (
-            <article key={item.question} className="rounded-2xl border border-ink-100 bg-ink-50/60 p-4">
-              <h4 className="font-semibold text-ink-900">{item.question}</h4>
-              <p className="mt-2 text-sm leading-6 text-ink-600">{item.answer}</p>
+            <article key={item.question} className="rounded-2xl border border-teal-300/15 bg-ink-900/55 p-4">
+              <h4 className="font-semibold text-ink-50">{item.question}</h4>
+              <p className="mt-2 text-sm leading-6 text-ink-100/70">{item.answer}</p>
             </article>
           ))}
         </div>

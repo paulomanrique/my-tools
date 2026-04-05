@@ -24,7 +24,7 @@ export function AdSlot({ slotId, label }: AdSlotConfig) {
 
   if (!publisherId) {
     return (
-      <div className="panel surface-grid flex min-h-32 items-center justify-center p-6 text-center text-sm text-ink-500">
+      <div className="panel glass-cut surface-grid flex min-h-32 items-center justify-center p-6 text-center text-sm text-ink-200/70">
         <div>
           <p className="eyebrow mb-2">{label}</p>
           <p>{t('adPlaceholder')}</p>
