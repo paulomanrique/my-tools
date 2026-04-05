@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { AdSlot } from './AdSlot'
@@ -22,7 +21,6 @@ interface ToolShellProps {
 
 export function ToolShell({ locale, toolId, title, description, children }: ToolShellProps) {
   const { t } = useTranslation()
-  const relatedTools = useMemo(() => TOOLS.filter((tool) => tool.id !== toolId), [toolId])
 
   return (
     <div className="min-h-screen p-4 text-ink-50 md:p-6">
@@ -65,8 +63,6 @@ export function ToolShell({ locale, toolId, title, description, children }: Tool
               })}
             </nav>
 
-            <AdSlot slotId="sidebar" label={t('adLabel')} />
-
             <div className="glass-cut rounded-3xl border border-coral-400/30 bg-gradient-to-br from-coral-500/14 to-teal-400/10 p-5 text-ink-50">
               <p className="text-sm leading-6 text-ink-100/86">{t('allClientSide')}</p>
               <a
@@ -89,29 +85,11 @@ export function ToolShell({ locale, toolId, title, description, children }: Tool
                 <p className="mt-4 text-lg leading-8 text-ink-100/76">{description}</p>
               </div>
             </div>
-            <div className="space-y-10 px-6 py-8 md:px-10">{children}</div>
-          </section>
-
-          <section className="panel glass-cut p-6">
-            <p className="eyebrow mb-4">{t('relatedTools')}</p>
-            <div className="grid gap-3 md:grid-cols-2">
-              {relatedTools.map((tool) => {
-                const section = sectionByTool[tool.id]
-                return (
-                  <Link
-                    key={tool.id}
-                    to={getToolPath(locale, tool.id)}
-                    className="glass-cut border border-teal-300/20 bg-ink-800/55 p-5 transition hover:border-coral-400/60 hover:bg-ink-800/80"
-                  >
-                    <p className="font-semibold text-ink-50">{t(`${section}.title`)}</p>
-                    <p className="mt-2 text-sm leading-6 text-ink-200/70">{t(`${section}.short`)}</p>
-                  </Link>
-                )
-              })}
+            <div className="space-y-10 px-6 py-8 md:px-10">
+              {children}
+              <AdSlot slotId="content-end" label={t('adLabel')} />
             </div>
           </section>
-
-          <p className="px-1 pb-8 text-sm text-ink-200/60">{t('footerNote')}</p>
         </main>
       </div>
     </div>
