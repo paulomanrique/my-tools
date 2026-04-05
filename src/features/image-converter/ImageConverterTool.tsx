@@ -3,15 +3,36 @@ import { useTranslation } from 'react-i18next'
 import type { ImageOutputFormat } from '../../types'
 
 const INPUT_ACCEPT = 'image/png,image/jpeg,image/webp,image/bmp,image/gif'
+const OUTPUT_MIME_TYPES: Record<ImageOutputFormat, string> = {
+  png: 'image/png',
+  jpeg: 'image/jpeg',
+  webp: 'image/webp',
+  avif: 'image/avif',
+}
 
 function canEncode(format: ImageOutputFormat) {
   const canvas = document.createElement('canvas')
-  const dataUrl = canvas.toDataURL(`image/${format}`)
-  return dataUrl.startsWith(`data:image/${format}`)
+  const mimeType = OUTPUT_MIME_TYPES[format]
+  const dataUrl = canvas.toDataURL(mimeType)
+  return dataUrl.startsWith(`data:${mimeType}`)
 }
 
 async function loadBitmap(file: File) {
   return createImageBitmap(file)
+}
+
+function dataUrlToBlob(dataUrl: string) {
+  const [header, content] = dataUrl.split(',')
+  const mimeMatch = header.match(/data:(.*?);base64/)
+  const mimeType = mimeMatch?.[1] ?? 'application/octet-stream'
+  const binary = atob(content)
+  const bytes = new Uint8Array(binary.length)
+
+  for (let index = 0; index < binary.length; index += 1) {
+    bytes[index] = binary.charCodeAt(index)
+  }
+
+  return new Blob([bytes], { type: mimeType })
 }
 
 export function ImageConverterTool() {
@@ -71,17 +92,14 @@ export function ImageConverterTool() {
     }
 
     ctx.drawImage(bitmap, 0, 0)
+    const mimeType = OUTPUT_MIME_TYPES[format]
     const blob = await new Promise<Blob | null>((resolve) => {
-      canvas.toBlob(resolve, `image/${format}`, quality)
+      canvas.toBlob(resolve, mimeType, quality)
     })
-
-    if (!blob) {
-      setError(t('image.unsupported'))
-      return
-    }
+    const finalBlob = blob ?? dataUrlToBlob(canvas.toDataURL(mimeType, quality))
 
     if (downloadUrl) URL.revokeObjectURL(downloadUrl)
-    setDownloadUrl(URL.createObjectURL(blob))
+    setDownloadUrl(URL.createObjectURL(finalBlob))
   }
 
   return (
