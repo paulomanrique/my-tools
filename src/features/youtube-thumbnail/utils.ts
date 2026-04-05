@@ -26,6 +26,9 @@ export function parseYoutubeVideoId(input: string) {
     if (url.pathname.includes('/shorts/')) {
       return url.pathname.split('/shorts/')[1]?.slice(0, 11) ?? null
     }
+    if (url.pathname.includes('/live/')) {
+      return url.pathname.split('/live/')[1]?.slice(0, 11) ?? null
+    }
   } catch {
     return null
   }
