@@ -84,7 +84,6 @@ export function ToolShell({ locale, toolId, title, description, children }: Tool
         <main className="space-y-4">
           <section className="panel glass-cut overflow-hidden">
             <div className="surface-grid cyber-line border-b border-teal-300/20 px-6 py-10 md:px-10">
-              <p className="eyebrow mb-4">{title}</p>
               <div className="max-w-3xl">
                 <h2 className="neon-title font-serif text-4xl leading-tight text-ink-50 md:text-5xl">{title}</h2>
                 <p className="mt-4 text-lg leading-8 text-ink-100/76">{description}</p>
