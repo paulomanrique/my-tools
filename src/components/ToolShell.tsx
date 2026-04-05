@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { AdSlot } from './AdSlot'
@@ -22,25 +22,19 @@ interface ToolShellProps {
 
 export function ToolShell({ locale, toolId, title, description, children }: ToolShellProps) {
   const { t } = useTranslation()
-  const [open, setOpen] = useState(false)
   const relatedTools = useMemo(() => TOOLS.filter((tool) => tool.id !== toolId), [toolId])
 
   return (
     <div className="min-h-screen p-4 text-ink-50 md:p-6">
       <div className="mx-auto grid max-w-7xl gap-4 lg:grid-cols-[300px_minmax(0,1fr)]">
         <aside className="panel glass-cut h-fit p-4 lg:sticky lg:top-6 lg:p-6">
-          <div className="flex items-start justify-between gap-4 lg:block">
-            <div>
-              <p className="eyebrow mb-3">{t('siteName')}</p>
-              <h1 className="neon-title font-serif text-3xl leading-tight text-ink-50">{t('navTitle')}</h1>
-              <p className="mt-3 text-sm text-ink-200/75">{t('siteTagline')}</p>
-            </div>
-            <button className="button-secondary lg:hidden" onClick={() => setOpen((value) => !value)}>
-              Menu
-            </button>
+          <div>
+            <p className="eyebrow mb-3">{t('siteName')}</p>
+            <h1 className="neon-title font-serif text-3xl leading-tight text-ink-50">{t('navTitle')}</h1>
+            <p className="mt-3 text-sm text-ink-200/75">{t('siteTagline')}</p>
           </div>
 
-          <div className={`mt-6 space-y-6 ${open ? 'block' : 'hidden lg:block'}`}>
+          <div className="mt-6 space-y-6">
             <LanguageSwitcher locale={locale} toolId={toolId} />
 
             <nav className="space-y-3" aria-label={t('navTitle')}>

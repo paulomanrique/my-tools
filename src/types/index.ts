@@ -57,6 +57,8 @@ export interface ResolverDefinition {
   endpoint: string
   kind: 'google-json' | 'rfc-json'
   browserSupported?: boolean
+  mapX?: number
+  mapY?: number
 }
 
 export interface DnsAnswer {

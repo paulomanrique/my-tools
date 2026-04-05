@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { DNS_RECORD_TYPES, RESOLVERS } from '../../config/dns'
+import { DnsWorldMap } from './DnsWorldMap'
 import type { DnsAnswer, DnsQueryResult, DnsRecordType, ResolverDefinition } from '../../types'
 
 function getTypeCode(type: DnsRecordType) {
@@ -126,37 +127,39 @@ export function DnsPropagationTool() {
 
       {error && <p className="text-sm text-red-600">{error}</p>}
 
-      <div className="overflow-x-auto rounded-3xl border border-ink-200 bg-white">
-        <table className="min-w-full divide-y divide-ink-200 text-left text-sm">
-          <thead className="bg-ink-50">
+      <DnsWorldMap resolvers={activeResolvers} results={results} />
+
+      <div className="glass-cut overflow-x-auto rounded-3xl border border-teal-300/20 bg-ink-900/70">
+        <table className="min-w-full divide-y divide-teal-300/10 text-left text-sm">
+          <thead className="bg-ink-800/85">
             <tr>
-              <th className="px-4 py-3 font-semibold text-ink-900">{t('dns.resolver')}</th>
-              <th className="px-4 py-3 font-semibold text-ink-900">{t('dns.region')}</th>
-              <th className="px-4 py-3 font-semibold text-ink-900">{t('dns.status')}</th>
-              <th className="px-4 py-3 font-semibold text-ink-900">{t('dns.answers')}</th>
-              <th className="px-4 py-3 font-semibold text-ink-900">{t('dns.duration')}</th>
+              <th className="px-4 py-3 font-semibold text-ink-50">{t('dns.resolver')}</th>
+              <th className="px-4 py-3 font-semibold text-ink-50">{t('dns.region')}</th>
+              <th className="px-4 py-3 font-semibold text-ink-50">{t('dns.status')}</th>
+              <th className="px-4 py-3 font-semibold text-ink-50">{t('dns.answers')}</th>
+              <th className="px-4 py-3 font-semibold text-ink-50">{t('dns.duration')}</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-ink-100">
+          <tbody className="divide-y divide-teal-300/10">
             {results.map((result) => {
               const filteredAnswers = normalizedFilter
                 ? result.answers.filter((answer) => answer.data.toLowerCase().includes(normalizedFilter))
                 : result.answers
 
               return (
-                <tr key={result.resolverId}>
-                  <td className="px-4 py-4 font-medium text-ink-900">{result.resolverName}</td>
-                  <td className="px-4 py-4 text-ink-600">{result.region}</td>
+                <tr key={result.resolverId} className="bg-transparent align-top">
+                  <td className="px-4 py-4 font-medium text-ink-50">{result.resolverName}</td>
+                  <td className="px-4 py-4 text-ink-100/65">{result.region}</td>
                   <td className="px-4 py-4">
                     <span
-                      className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
+                      className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] ${
                         result.status === 'success'
-                          ? 'bg-teal-100 text-teal-500'
+                          ? 'bg-teal-400/15 text-teal-300'
                           : result.status === 'loading'
-                            ? 'bg-ink-100 text-ink-600'
+                            ? 'bg-coral-500/15 text-coral-300'
                             : result.status === 'empty'
-                              ? 'bg-amber-100 text-amber-700'
-                              : 'bg-red-100 text-red-600'
+                              ? 'bg-amber-500/15 text-amber-300'
+                              : 'bg-red-500/15 text-red-300'
                       }`}
                     >
                       {result.status === 'loading'
@@ -168,7 +171,7 @@ export function DnsPropagationTool() {
                             : 'OK'}
                     </span>
                   </td>
-                  <td className="px-4 py-4 text-ink-600">
+                  <td className="px-4 py-4 text-ink-100/70">
                     {filteredAnswers.length > 0 ? (
                       <ul className="space-y-1">
                         {filteredAnswers.map((answer) => (
@@ -181,7 +184,7 @@ export function DnsPropagationTool() {
                       '—'
                     )}
                   </td>
-                  <td className="px-4 py-4 text-ink-600">{result.duration} ms</td>
+                  <td className="px-4 py-4 text-ink-100/65">{result.duration} ms</td>
                 </tr>
               )
             })}
